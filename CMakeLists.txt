@@ -10,5 +10,6 @@ find_package(ament_cmake REQUIRED)
 
 add_subdirectory(ridgeback_ur5_bringup)
 add_subdirectory(ridgeback_ur5_description)
+add_subdirectory(ridgeback_ur5_moveit_config)
 
 ament_package()
