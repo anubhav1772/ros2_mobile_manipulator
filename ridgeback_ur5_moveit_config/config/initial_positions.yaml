@@ -1,0 +1,9 @@
+# Default initial positions for ridgeback_ur5's ros2_control fake system
+
+initial_positions:
+  ur_arm_elbow_joint: 0
+  ur_arm_shoulder_lift_joint: 0
+  ur_arm_shoulder_pan_joint: 0
+  ur_arm_wrist_1_joint: 0
+  ur_arm_wrist_2_joint: 0
+  ur_arm_wrist_3_joint: 0
