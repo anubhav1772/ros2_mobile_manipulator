@@ -1,0 +1,25 @@
+moveit_setup_assistant_config:
+  urdf:
+    package: ridgeback_ur5_description
+    relative_path: urdf/ridgeback_ur5_description.urdf.xacro
+  srdf:
+    relative_path: config/ridgeback_ur5.srdf
+  package_settings:
+    author_name: Anubhav Singh
+    author_email: ros20.doc@gmail.com
+    generated_timestamp: 1747233957
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+      - velocity
+  modified_urdf:
+    xacros:
+      - control_xacro
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+      - velocity
