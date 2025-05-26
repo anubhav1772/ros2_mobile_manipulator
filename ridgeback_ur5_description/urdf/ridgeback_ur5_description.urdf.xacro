@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <robot xmlns:xacro="http://ros.org/wiki/xacro" name="ridgeback_ur5">
 
   <xacro:arg name="ur_type" default="ur5"/>
@@ -26,4 +27,3 @@
   <!-- <link name="world"/> -->
 
 </robot>
-
