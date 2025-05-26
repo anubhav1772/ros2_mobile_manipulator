@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<sdf version="1.5">
+<sdf version="1.6">
   <model name="ground_plane">
     <static>true</static>
     <link name="link">
@@ -11,9 +11,6 @@
           </plane>
         </geometry>
         <surface>
-          <contact>
-             <collide_bitmask>0xffff</collide_bitmask>
-          </contact>
           <friction>
             <ode>
               <mu>100</mu>
