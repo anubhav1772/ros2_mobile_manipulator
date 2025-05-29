@@ -468,5 +468,12 @@
       <child link="${tf_prefix}tool0"/>
     </joint>
 
+    <link name="${tf_prefix}ee_link" />
+    <joint name="manipulator_dummy_joint" type="fixed">
+      <origin xyz="0 0 0.16" rpy="0 0 0" />
+      <parent link="${tf_prefix}tool0"/>
+      <child link="${tf_prefix}ee_link"/>
+    </joint>
+
   </xacro:macro>
 </robot>
