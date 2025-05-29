@@ -5,11 +5,11 @@
   <xacro:arg name="ur_type" default="ur5"/>
   <xacro:arg name="sim_ignition" default="true"/>
   <xacro:arg name="tf_prefix" default="ur_arm_" />
-  <xacro:arg name="parent" default="mid_mount" /> <!--world-->
-  <xacro:arg name="joint_limit_params" default="$(find ur_description)/config/$(arg ur_type)/joint_limits.yaml"/>
-  <xacro:arg name="kinematics_params" default="$(find ur_description)/config/$(arg ur_type)/default_kinematics.yaml"/>
-  <xacro:arg name="physical_params" default="$(find ur_description)/config/$(arg ur_type)/physical_parameters.yaml"/>
-  <xacro:arg name="visual_params" default="$(find ur_description)/config/$(arg ur_type)/visual_parameters.yaml"/>
+  <xacro:arg name="parent" default="world" /> <!--mid_mount-->
+  <xacro:arg name="joint_limit_params" default="$(find ur5_robotiq_description)/config/$(arg ur_type)/joint_limits.yaml"/>
+  <xacro:arg name="kinematics_params" default="$(find ur5_robotiq_description)/config/$(arg ur_type)/default_kinematics.yaml"/>
+  <xacro:arg name="physical_params" default="$(find ur5_robotiq_description)/config/$(arg ur_type)/physical_parameters.yaml"/>
+  <xacro:arg name="visual_params" default="$(find ur5_robotiq_description)/config/$(arg ur_type)/visual_parameters.yaml"/>
   <xacro:arg name="transmission_hw_interface" default="hardware_interface/PositionJointInterface"/>
   <xacro:arg name="use_fake_hardware" default="false" />
   <xacro:arg name="fake_sensor_commands" default="false" />
@@ -18,23 +18,28 @@
   <xacro:arg name="headless_mode" default="false" />
 
   <!-- initial position for simulations (Fake Hardware, Gazebo, Ignition) -->
-  <xacro:arg name="initial_positions_file" default="$(find ur_description)/config/initial_positions.yaml"/>
+  <xacro:arg name="initial_positions_file" default="$(find ur5_robotiq_description)/config/$(arg ur_type)/initial_positions.yaml"/>
 
   <!-- convert to property to use substitution in function -->
   <xacro:property name="initial_positions_file" default="$(arg initial_positions_file)"/>
 
+  <!-- <xacro:include filename="$(find ur5_robotiq_description)/urdf/ur.urdf.xacro" /> -->
+  <!-- <xacro:include filename="$(find ridgeback_description)/urdf/ridgeback.urdf.xacro" /> -->
+  
   <!-- <xacro:ur_robot
     name="$(arg name)"
     ur_type="$(arg ur_type)"
     tf_prefix="ur_arm_"
     parent="world"
-    joint_limits_parameters_file="$(find ur_description)/config/$(arg ur_type)/joint_limits.yaml"
-    kinematics_parameters_file="$(find ur_description)/config/$(arg ur_type)/default_kinematics.yaml"
-    physical_parameters_file="$(find ur_description)/config/$(arg ur_type)/physical_parameters.yaml"
-    visual_parameters_file="$(find ur_description)/config/$(arg ur_type)/visual_parameters.yaml"   
+    joint_limits_parameters_file="$(find ur5_robotiq_description)/config/$(arg ur_type)/joint_limits.yaml"
+    kinematics_parameters_file="$(find ur5_robotiq_description)/config/$(arg ur_type)/default_kinematics.yaml"
+    physical_parameters_file="$(find ur5_robotiq_description)/config/$(arg ur_type)/physical_parameters.yaml"
+    visual_parameters_file="$(find ur5_robotiq_description)/config/$(arg ur_type)/visual_parameters.yaml"   
     sim_ignition="$(arg sim_ignition)">
     <origin xyz="$(optenv RIDGEBACK_UR_XYZ 0 0 0)" rpy="$(optenv RIDGEBACK_UR_RPY 0 0 0)"/>
   </xacro:ur_robot> -->
+
+  <xacro:include filename="$(find ur5_robotiq_description)/urdf/ur5_robotiq_85_gripper.urdf.xacro" />
 
   <!-- arm -->
   <xacro:ur_robot
@@ -64,9 +69,6 @@
     <origin xyz="$(optenv RIDGEBACK_UR_XYZ 0 0 0)" rpy="$(optenv RIDGEBACK_UR_RPY 0 0 0)"/>
   </joint> -->
 
-  <!-- <link name="world"/>  -->
-
-  <xacro:include filename="$(find ur_description)/urdf/ur.urdf.xacro" />
-  <xacro:include filename="$(find ridgeback_description)/urdf/ridgeback.urdf.xacro" />
+  <link name="world"/> 
 
 </robot>
