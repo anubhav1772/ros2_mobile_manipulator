@@ -1,8 +1,55 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="ridgeback_ur5">
+
+  <xacro:arg name="name" default="ur5"/>
+  <xacro:arg name="ur_type" default="ur5"/>
+  <xacro:arg name="namespace" default=""/>
+  <xacro:arg name="sim_ignition" default="true"/>
+  <xacro:arg name="tf_prefix" default="ur_arm_" />
+  <xacro:arg name="parent" default="world" /> <!--mid_mount-->
+  <xacro:arg name="joint_limit_params" default="$(find ur5_robotiq_description)/config/$(arg ur_type)/joint_limits.yaml"/>
+  <xacro:arg name="kinematics_params" default="$(find ur5_robotiq_description)/config/$(arg ur_type)/default_kinematics.yaml"/>
+  <xacro:arg name="physical_params" default="$(find ur5_robotiq_description)/config/$(arg ur_type)/physical_parameters.yaml"/>
+  <xacro:arg name="visual_params" default="$(find ur5_robotiq_description)/config/$(arg ur_type)/visual_parameters.yaml"/>
+  <xacro:arg name="transmission_hw_interface" default="hardware_interface/PositionJointInterface"/>
+  <xacro:arg name="use_fake_hardware" default="false" />
+  <xacro:arg name="fake_sensor_commands" default="false" />
+  <xacro:arg name="sim_gazebo" default="false" />
+  <xacro:arg name="sim_ignition" default="true" />
+  <xacro:arg name="headless_mode" default="false" />
+
+  <!-- initial position for simulations (Fake Hardware, Gazebo, Ignition) -->
+  <xacro:arg name="initial_positions_file" default="$(find ur5_robotiq_description)/config/$(arg ur_type)/initial_positions.yaml"/>
+
+  <!-- convert to property to use substitution in function -->
+  <xacro:property name="initial_positions_file" default="$(arg initial_positions_file)"/>
 
   <xacro:include filename="$(find ur5_robotiq_description)/urdf/ur.urdf.xacro" />
   <xacro:include filename="$(find ur5_robotiq_description)/urdf/robotiq_85/robotiq_85_gripper.urdf.xacro" />
+
+  <!-- arm -->
+  <xacro:ur_robot
+    name="$(arg name)"
+    ur_type="$(arg ur_type)"
+    tf_prefix="$(arg tf_prefix)"
+    parent="$(arg parent)"
+    joint_limits_parameters_file="$(arg joint_limit_params)"
+    kinematics_parameters_file="$(arg kinematics_params)"
+    physical_parameters_file="$(arg physical_params)"
+    visual_parameters_file="$(arg visual_params)"
+    transmission_hw_interface="$(arg transmission_hw_interface)"
+    use_fake_hardware="$(arg use_fake_hardware)"
+    fake_sensor_commands="$(arg fake_sensor_commands)"
+    sim_gazebo="$(arg sim_gazebo)"
+    sim_ignition="$(arg sim_ignition)"
+    headless_mode="$(arg headless_mode)"
+    initial_positions="${xacro.load_yaml(initial_positions_file)}"
+    >
+    <!-- position robot in the world -->
+    <origin xyz="$(optenv RIDGEBACK_UR_XYZ 0 0 0)" rpy="$(optenv RIDGEBACK_UR_RPY 0 0 0)"/>          
+  </xacro:ur_robot>
+
+  <link name="world"/> 
   
   <link name="robotiq_coupler">
     <visual>
@@ -36,7 +83,7 @@
     <mu1>0.9</mu1>
     <mu2>0.9</mu2>
     <material>Gazebo/FlatBlack</material>
-  </gazebo>
+  </gazebo> 
   
   <!-- Equivalent to the OpenRAVE manipulator denso_robotiq_85_gripper -->
   <!-- <link name="ee_link" />
@@ -49,10 +96,10 @@
   <!-- Attach the robotiq 85 gripper -->
   <xacro:robotiq_85_gripper prefix="" parent="robotiq_coupler" >
     <origin xyz="0 0 0.004" rpy="0 ${-pi/2} ${pi}"/>
-  </xacro:robotiq_85_gripper> 
+  </xacro:robotiq_85_gripper>  
   
   <!-- Gazebo FT sensor plugin -->
-  <gazebo reference="ur_arm_wrist_3_joint">
+  <!-- <gazebo reference="ur_arm_wrist_3_joint">
     <provideFeedback>true</provideFeedback>
   </gazebo>
   <gazebo>
@@ -62,10 +109,10 @@
       <gaussianNoise>0.0</gaussianNoise>
       <jointName>wrist_3_joint</jointName>
     </plugin>
-  </gazebo>
+  </gazebo>  -->
   
   <!-- Gazebo grasping plugin -->
-  <gazebo>
+  <!-- <gazebo>
     <gripper name="gazebo_gripper">
       <grasp_check>
         <attach_steps>2</attach_steps>    
@@ -76,6 +123,15 @@
       <gripper_link>robotiq_85_right_finger_tip_link</gripper_link>
       <palm_link>robotiq_85_base_link</palm_link>
     </gripper>
+  </gazebo> -->
+
+  <gazebo>
+    <plugin filename="ign_ros2_control-system" name="ign_ros2_control::IgnitionROS2ControlPlugin">
+        <ros>
+          <namespace>$(arg namespace)</namespace>
+        </ros>
+        <parameters>$(arg controller_file)</parameters>
+    </plugin>
   </gazebo>
   
 </robot>
