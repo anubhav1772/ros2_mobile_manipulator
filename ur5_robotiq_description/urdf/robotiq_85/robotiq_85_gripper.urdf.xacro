@@ -2,9 +2,13 @@
 
 <robot name="robotiq_85_gripper" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-  <xacro:include filename="$(find ur5_robotiq_description)/urdf/robotiq_85/robotiq_85_gripper.transmission.xacro" />
+  <!-- <xacro:include filename="$(find ur5_robotiq_description)/urdf/robotiq_85/robotiq_85_gripper.transmission.xacro" /> -->
   
   <xacro:macro name="robotiq_85_gripper" params="prefix parent *origin">
+
+    <!-- ros2 control include -->
+    <xacro:include filename="$(find ur5_robotiq_description)/urdf/robotiq_85/robotiq_85.ros2_control.xacro" />
+    <xacro:robotiq_gripper_ros2_control prefix="${prefix}"/>
 
     <joint name="${prefix}robotiq_85_base_joint" type="fixed">
       <parent link="${parent}"/>
@@ -15,12 +19,12 @@
     <link name="${prefix}robotiq_85_base_link">
       <visual>
         <geometry>
-          <mesh filename="package://ur5_robotiq_description/meshes/robotiq_85/visual/robotiq_85_base_link.dae"/>
+          <mesh filename="file://ur5_robotiq_description/meshes/robotiq_85/visual/robotiq_85_base_link.dae"/>
         </geometry>
       </visual>
       <collision>
         <geometry>
-          <mesh filename="package://ur5_robotiq_description/meshes/robotiq_85/collision/robotiq_85_base_link.stl"/>
+          <mesh filename="file://ur5_robotiq_description/meshes/robotiq_85/collision/robotiq_85_base_link.stl"/>
         </geometry>
       </collision>
       <inertial>
@@ -52,12 +56,12 @@
     <link name="${prefix}robotiq_85_left_knuckle_link">
       <visual>
         <geometry>
-          <mesh filename="package://ur5_robotiq_description/meshes/robotiq_85/visual/robotiq_85_knuckle_link.dae"/>
+          <mesh filename="file://ur5_robotiq_description/meshes/robotiq_85/visual/robotiq_85_knuckle_link.dae"/>
         </geometry>
       </visual>
       <collision>
         <geometry>
-          <mesh filename="package://ur5_robotiq_description/meshes/robotiq_85/collision/robotiq_85_knuckle_link.stl"/>
+          <mesh filename="file://ur5_robotiq_description/meshes/robotiq_85/collision/robotiq_85_knuckle_link.stl"/>
         </geometry>
       </collision>
       <inertial>
@@ -72,12 +76,12 @@
     <link name="${prefix}robotiq_85_right_knuckle_link">
       <visual>
         <geometry>
-          <mesh filename="package://ur5_robotiq_description/meshes/robotiq_85/visual/robotiq_85_knuckle_link.dae"/>
+          <mesh filename="file://ur5_robotiq_description/meshes/robotiq_85/visual/robotiq_85_knuckle_link.dae"/>
         </geometry>
       </visual>
       <collision>
         <geometry>
-          <mesh filename="package://ur5_robotiq_description/meshes/robotiq_85/collision/robotiq_85_knuckle_link.stl"/>
+          <mesh filename="file://ur5_robotiq_description/meshes/robotiq_85/collision/robotiq_85_knuckle_link.stl"/>
         </geometry>
       </collision>
       <inertial>
@@ -104,12 +108,12 @@
     <link name="${prefix}robotiq_85_left_finger_link">
       <visual>
         <geometry>
-          <mesh filename="package://ur5_robotiq_description/meshes/robotiq_85/visual/robotiq_85_finger_link.dae"/>
+          <mesh filename="file://ur5_robotiq_description/meshes/robotiq_85/visual/robotiq_85_finger_link.dae"/>
         </geometry>
       </visual>
       <collision>
         <geometry>
-          <mesh filename="package://ur5_robotiq_description/meshes/robotiq_85/collision/robotiq_85_finger_link.stl"/>
+          <mesh filename="file://ur5_robotiq_description/meshes/robotiq_85/collision/robotiq_85_finger_link.stl"/>
         </geometry>
       </collision>
       <inertial>
@@ -124,12 +128,12 @@
     <link name="${prefix}robotiq_85_right_finger_link">
       <visual>
         <geometry>
-          <mesh filename="package://ur5_robotiq_description/meshes/robotiq_85/visual/robotiq_85_finger_link.dae"/>
+          <mesh filename="file://ur5_robotiq_description/meshes/robotiq_85/visual/robotiq_85_finger_link.dae"/>
         </geometry>
       </visual>
       <collision>
         <geometry>
-          <mesh filename="package://ur5_robotiq_description/meshes/robotiq_85/collision/robotiq_85_finger_link.stl"/>
+          <mesh filename="file://ur5_robotiq_description/meshes/robotiq_85/collision/robotiq_85_finger_link.stl"/>
         </geometry>
       </collision>
       <inertial>
@@ -162,12 +166,12 @@
     <link name="${prefix}robotiq_85_left_inner_knuckle_link">
       <visual>
         <geometry>
-          <mesh filename="package://ur5_robotiq_description/meshes/robotiq_85/visual/robotiq_85_inner_knuckle_link.dae"/>
+          <mesh filename="file://ur5_robotiq_description/meshes/robotiq_85/visual/robotiq_85_inner_knuckle_link.dae"/>
         </geometry>
       </visual>
       <collision>
         <geometry>
-          <mesh filename="package://ur5_robotiq_description/meshes/robotiq_85/collision/robotiq_85_inner_knuckle_link.stl"/>
+          <mesh filename="file://ur5_robotiq_description/meshes/robotiq_85/collision/robotiq_85_inner_knuckle_link.stl"/>
         </geometry>
       </collision>
       <inertial>
@@ -181,12 +185,12 @@
     <link name="${prefix}robotiq_85_right_inner_knuckle_link">
       <visual>
         <geometry>
-          <mesh filename="package://ur5_robotiq_description/meshes/robotiq_85/visual/robotiq_85_inner_knuckle_link.dae"/>
+          <mesh filename="file://ur5_robotiq_description/meshes/robotiq_85/visual/robotiq_85_inner_knuckle_link.dae"/>
         </geometry>
       </visual>
       <collision>
         <geometry>
-          <mesh filename="package://ur5_robotiq_description/meshes/robotiq_85/collision/robotiq_85_inner_knuckle_link.stl"/>
+          <mesh filename="file://ur5_robotiq_description/meshes/robotiq_85/collision/robotiq_85_inner_knuckle_link.stl"/>
         </geometry>
       </collision>
       <inertial>
@@ -220,12 +224,12 @@
     <link name="${prefix}robotiq_85_left_finger_tip_link">
       <visual>
         <geometry>
-          <mesh filename="package://ur5_robotiq_description/meshes/robotiq_85/visual/robotiq_85_finger_tip_link.dae"/>
+          <mesh filename="file://ur5_robotiq_description/meshes/robotiq_85/visual/robotiq_85_finger_tip_link.dae"/>
         </geometry>
       </visual>
       <collision>
         <geometry>
-          <mesh filename="package://ur5_robotiq_description/meshes/robotiq_85/collision/robotiq_85_finger_tip_link.stl"/>
+          <mesh filename="file://ur5_robotiq_description/meshes/robotiq_85/collision/robotiq_85_finger_tip_link.stl"/>
         </geometry>
       </collision>
       <inertial>
@@ -240,12 +244,12 @@
     <link name="${prefix}robotiq_85_right_finger_tip_link">
       <visual>
         <geometry>
-          <mesh filename="package://ur5_robotiq_description/meshes/robotiq_85/visual/robotiq_85_finger_tip_link.dae"/>
+          <mesh filename="file://ur5_robotiq_description/meshes/robotiq_85/visual/robotiq_85_finger_tip_link.dae"/>
         </geometry>
       </visual>
       <collision>
         <geometry>
-          <mesh filename="package://ur5_robotiq_description/meshes/robotiq_85/collision/robotiq_85_finger_tip_link.stl"/>
+          <mesh filename="file://ur5_robotiq_description/meshes/robotiq_85/collision/robotiq_85_finger_tip_link.stl"/>
         </geometry>
       </collision>
       <inertial>
@@ -258,7 +262,7 @@
     </link>
     
     <!-- Improve grasping physics -->
-    <gazebo reference="${prefix}robotiq_85_left_finger_tip_link">
+    <!-- <gazebo reference="${prefix}robotiq_85_left_finger_tip_link">
       <kp>1000000.0</kp>
       <kd>1.0</kd>
       <mu1>1.0</mu1>
@@ -271,9 +275,9 @@
       <mu1>1.0</mu1>
       <mu2>1.0</mu2>
       <minDepth>0.001</minDepth>
-    </gazebo>
+    </gazebo> -->
     
-    <xacro:robotiq_85_gripper_transmission prefix="${prefix}" />
+    <!-- <xacro:robotiq_85_gripper_transmission prefix="${prefix}" /> -->
 
   </xacro:macro>
 </robot>
