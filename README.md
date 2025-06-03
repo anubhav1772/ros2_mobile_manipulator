@@ -6,6 +6,6 @@ Ridgeback + UR5 (ROS 2 Humble and Gazebo/Ignition)
 ### Steps
 Start the simulation using:
 
-    $ roslaunch ridgeback_ur5_gazebo bringup.launch.py
+    $ ros2 launch ridgeback_ur5_gazebo bringup.launch.py
 
 
